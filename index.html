@@ -1,133 +1,147 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio & Client Galleries</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serhii Shelestiuk | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            brand: { dark: '#0a0a0a', card: '#121212', accent: '#3b82f6' }
-          }
+          colors: { brand: { dark: '#0a0a0a', card: '#121212', accent: '#3b82f6' } }
         }
       }
     }
-    </script>
+  </script>
 </head>
 <body class="bg-brand-dark text-gray-100 font-sans antialiased min-h-screen flex flex-col">
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="text-2xl font-bold tracking-wider uppercase hover:text-gray-300 transition">Portfolio</a>
-            <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest text-gray-400">
-                <a href="#work" class="hover:text-white transition">Galleries</a>
-                <a href="#about" class="hover:text-white transition">About</a>
-                <a href="#contact" class="hover:text-white transition">Contact</a>
-            </nav>
-            <a href="/admin/" class="text-xs border border-gray-700 rounded-full px-4 py-2 hover:bg-gray-800 transition text-gray-400">Admin Area</a>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">Visual Stories & Client Galleries</h1>
-        <p class="text-xl text-gray-400 max-w-2xl">High-resolution photography, concert coverage, and client download portals.</p>
-    </section>
-
-    <!-- Galleries Filter & Grid -->
-    <section id="work" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
-
-        <!-- Filter Buttons -->
-        <div class="flex flex-wrap gap-3 mb-10" id="filter-bar">
-            <button onclick="filterGallery('all')" class="px-5 py-2 rounded-full text-sm font-medium bg-white text-black transition">All</button>
-            <button onclick="filterGallery('concerts')" class="px-5 py-2 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition">Concerts</button>
-            <button onclick="filterGallery('portraits')" class="px-5 py-2 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition">Portraits</button>
-            <button onclick="filterGallery('video')" class="px-5 py-2 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition">Video</button>
-        </div>
-
-        <!-- Gallery Container -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
-            <!-- Demo Album 1 -->
-            <div class="gallery-item group relative bg-brand-card rounded-xl overflow-hidden border border-gray-800" data-category="concerts">
-                <div class="aspect-w-16 aspect-h-10 overflow-hidden bg-gray-900">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80" class="object-cover w-full h-64 group-hover:scale-105 transition duration-500" alt="Concert">
-                </div>
-                <div class="p-6">
-                    <span class="text-xs uppercase tracking-wider text-blue-400 font-semibold">Concert</span>
-                    <h3 class="text-xl font-bold mt-1 mb-2">Live Show at Berlin Stadium</h3>
-                    <p class="text-gray-400 text-sm mb-4">Full photo set from the live event. High-resolution downloads available.</p>
-                    <div class="flex gap-3">
-                        <button onclick="openModal('Berlin Concert', ['https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80', 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80'])" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-sm py-2 px-4 rounded-lg text-center transition">View Photos</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Demo Album 2 (Video) -->
-            <div class="gallery-item group relative bg-brand-card rounded-xl overflow-hidden border border-gray-800" data-category="video">
-                <div class="aspect-w-16 aspect-h-10 overflow-hidden bg-gray-900 relative">
-                    <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1000&q=80" class="object-cover w-full h-64 group-hover:scale-105 transition duration-500" alt="Video Showcase">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black/40">
-                        <i class="fa-solid fa-circle-play text-5xl text-white opacity-80 group-hover:opacity-100 transition"></i>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <span class="text-xs uppercase tracking-wider text-purple-400 font-semibold">Video</span>
-                    <h3 class="text-xl font-bold mt-1 mb-2">Backstage Teaser Video</h3>
-                    <p class="text-gray-400 text-sm mb-4">Official event recap film in 4K resolution.</p>
-                    <button onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="w-full bg-gray-800 hover:bg-gray-700 text-white text-sm py-2 px-4 rounded-lg transition">Watch Video</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Photo Viewer / Batch Download Modal -->
-    <div id="photo-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex-col">
-        <div class="p-4 flex justify-between items-center border-b border-gray-800">
-            <h3 id="modal-title" class="text-lg font-bold">Album View</h3>
-            <div class="flex items-center gap-4">
-                <button onclick="downloadSelectedZIP()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
-                    <i class="fa-solid fa-download"></i> Download ZIP
-                </button>
-                <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl px-2">&times;</button>
-            </div>
-        </div>
-        <div class="p-6 overflow-y-auto flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="modal-images">
-            <!-- Modal Images populated dynamically -->
-        </div>
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#home" onclick="showTab('home')" class="text-xl font-bold tracking-wider uppercase hover:text-gray-300 transition">serhii.shel</a>
+      <nav class="hidden md:flex space-x-8 text-sm uppercase tracking-widest text-gray-400">
+        <button onclick="showTab('home')" class="hover:text-white transition">Home</button>
+        <button onclick="showTab('projects')" class="hover:text-white transition">Projects</button>
+        <button onclick="showTab('gallery')" class="hover:text-white transition">Galleries</button>
+        <button onclick="showTab('about')" class="hover:text-white transition">About</button>
+      </nav>
+      <a href="/admin/" class="text-xs border border-gray-700 rounded-full px-4 py-2 hover:bg-gray-800 transition text-gray-400">Admin</a>
     </div>
+  </header>
 
-    <footer class="border-t border-gray-800 py-8 text-center text-gray-500 text-sm mt-auto">
-        &copy; 2026 Your Name Photography. Powered by Decap CMS.
-    </footer>
+  <!-- Main Content Area -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
 
-    <script>
+    <!-- 1) HOME TAB -->
+    <section id="tab-home" class="tab-content space-y-12">
+      <div class="text-center max-w-3xl mx-auto py-12">
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">Visual Stories & Photography</h1>
+        <p class="text-xl text-gray-400">Featured shots, live events, and commercial projects by Serhii Shelestiuk.</p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold mb-6 border-b border-gray-800 pb-3">Aktual Photos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="rounded-xl overflow-hidden bg-brand-card border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 object-cover">
+          </div>
+          <div class="rounded-xl overflow-hidden bg-brand-card border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 object-cover">
+          </div>
+          <div class="rounded-xl overflow-hidden bg-brand-card border border-gray-800">
+            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1000&q=80" class="w-full h-72 object-cover">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) PROJECTS TAB -->
+    <section id="tab-projects" class="tab-content hidden space-y-8">
+      <h2 class="text-3xl font-bold">Projects</h2>
+      <p class="text-gray-400">Select a project to open its photo session and download archives.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-brand-card rounded-xl overflow-hidden border border-gray-800 p-6 flex flex-col justify-between">
+          <div>
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1000&q=80" class="w-full h-56 object-cover rounded-lg mb-4">
+            <span class="text-xs uppercase text-blue-400 font-semibold">Concert</span>
+            <h3 class="text-xl font-bold mt-1 mb-2">Berlin Live Show</h3>
+            <p class="text-gray-400 text-sm mb-4">Full archive of high-res images from the concert.</p>
+          </div>
+          <button onclick="openModal('Berlin Live Show', ['https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80', 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80'])" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 rounded-lg text-sm font-medium transition">Open & Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) GALLERIES TAB -->
+    <section id="tab-gallery" class="tab-content hidden space-y-8">
+      <h2 class="text-3xl font-bold">Client Galleries</h2>
+      <p class="text-gray-400">All available shoot days with batch download support.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-brand-card p-6 rounded-xl border border-gray-800 flex justify-between items-center">
+          <div>
+            <h3 class="text-lg font-bold">Concert Day 1 (May 12)</h3>
+            <p class="text-xs text-gray-400 mt-1">45 items • Full resolution</p>
+          </div>
+          <button onclick="openModal('Concert Day 1', ['https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80'])" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm">View & Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) ABOUT TAB -->
+    <section id="tab-about" class="tab-content hidden max-w-2xl mx-auto space-y-6">
+      <h2 class="text-3xl font-bold">About Me</h2>
+      <p class="text-gray-300 leading-relaxed">Hello! I am Serhii Shelestiuk, a professional photographer specializing in live concerts, events, and visual storytelling. Available worldwide.</p>
+      <div class="bg-brand-card p-6 rounded-xl border border-gray-800 space-y-4">
+        <div class="flex items-center gap-3 text-gray-300">
+          <i class="fa-solid fa-envelope text-blue-400 w-6"></i>
+          <a href="mailto:serhii.shelestiuk.photo@gmail.com" class="hover:underline">serhii.shelestiuk.photo@gmail.com</a>
+        </div>
+        <div class="flex items-center gap-3 text-gray-300">
+          <i class="fa-brands fa-instagram text-pink-400 w-6"></i>
+          <a href="https://instagram.com/serhii.shel" target="_blank" class="hover:underline">@serhii.shel</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal for Photos & ZIP download -->
+  <div id="photo-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex-col">
+    <div class="p-4 flex justify-between items-center border-b border-gray-800">
+      <h3 id="modal-title" class="text-lg font-bold">Gallery</h3>
+      <div class="flex items-center gap-4">
+        <button onclick="downloadZIP()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
+          <i class="fa-solid fa-download"></i> Download ZIP
+        </button>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl px-2">&times;</button>
+      </div>
+    </div>
+    <div class="p-6 overflow-y-auto flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="modal-images"></div>
+  </div>
+
+  <footer class="border-t border-gray-800 py-8 text-center text-gray-500 text-sm">
+    &copy; 2026 Serhii Shelestiuk. All rights reserved.
+  </footer>
+
+  <script>
     let currentPhotos = [];
 
-    function filterGallery(category) {
-      const items = document.querySelectorAll('.gallery-item');
-      items.forEach(item => {
-        if (category === 'all' || item.dataset.category === category) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabName).classList.remove('hidden');
+      window.scrollTo(0,0);
     }
 
     function openModal(title, photos) {
       document.getElementById('modal-title').innerText = title;
       currentPhotos = photos;
-      const container = document.getElementById('modal-images');
-      container.innerHTML = photos.map((url, idx) => `
-        <div class="relative group rounded-lg overflow-hidden border border-gray-800 bg-gray-900">
+      document.getElementById('modal-images').innerHTML = photos.map(url => `
+        <div class="relative rounded-lg overflow-hidden border border-gray-800 bg-gray-900">
           <img src="${url}" class="w-full h-48 object-cover">
           <a href="${url}" target="_blank" download class="absolute bottom-2 right-2 bg-black/70 hover:bg-black text-white p-2 rounded-md text-xs">
             <i class="fa-solid fa-arrow-down"></i>
@@ -143,19 +157,17 @@
       document.getElementById('photo-modal').classList.remove('flex');
     }
 
-    async function downloadSelectedZIP() {
+    async function downloadZIP() {
       const zip = new JSZip();
       const folder = zip.folder("photos");
-      alert("Preparing ZIP download, please wait...");
+      alert("Preparing ZIP archive, please wait...");
       for (let i = 0; i < currentPhotos.length; i++) {
-        const response = await fetch(currentPhotos[i]);
-        const blob = await response.blob();
+        const res = await fetch(currentPhotos[i]);
+        const blob = await res.blob();
         folder.file(`photo_${i + 1}.jpg`, blob);
       }
-      zip.generateAsync({type:"blob"}).then(function(content) {
-        saveAs(content, "gallery_photos.zip");
-      });
+      zip.generateAsync({type:"blob"}).then(content => saveAs(content, "photos.zip"));
     }
-    </script>
+  </script>
 </body>
 </html>
