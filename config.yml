@@ -1,0 +1,19 @@
+﻿backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "galleries"
+    label: "Galleries"
+    folder: "content/galleries"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["concerts", "portraits", "video"]}
+      - {label: "Cover Image", name: "cover", widget: "image"}
+      - {label: "Photos", name: "photos", widget: "list", field: {label: "Photo", name: "photo", widget: "image"}}
+      - {label: "Video URL (optional)", name: "video_url", widget: "string", required: false}
